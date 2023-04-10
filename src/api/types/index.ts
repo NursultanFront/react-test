@@ -10,7 +10,7 @@ export type AccessTokenResult = {
   accessToken: string;
 };
 
-export type Bonus = {
+export type BonusResult = {
   resultOperation: {
     status: number;
     message: string;

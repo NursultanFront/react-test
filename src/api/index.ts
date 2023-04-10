@@ -14,7 +14,7 @@ class Api {
     return axios.create({
       baseURL: "http://84.201.188.117",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json-patch+json",
       },
       transformRequest: [(data) => JSON.stringify(data)],
       transformResponse: [(data) => JSON.parse(data ? data : "{}")],

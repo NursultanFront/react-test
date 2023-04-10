@@ -14,17 +14,14 @@ export class AccessTokenRest extends BasicRest {
   }
 
   getToken = () => {
-    return this.postRequest<AccessTokenResult>(
-      `${this.urlName}/${this.accessKey}`,
-      {
-        accessToken: this.accessKey,
-        idClient: this.ClientID,
-        latitude: 0,
-        longitude: 0,
-        paramName: "device",
-        paramValue: this.DeviceID,
-        sourceQuery: 0,
-      } as AccessToken
-    );
+    return this.postRequest<AccessTokenResult>(`${this.urlName}`, {
+      accessToken: this.accessKey,
+      idClient: this.ClientID,
+      latitude: 0,
+      longitude: 0,
+      paramName: "device",
+      paramValue: this.DeviceID,
+      sourceQuery: 0,
+    } as AccessToken);
   };
 }
