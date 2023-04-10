@@ -12,7 +12,7 @@ class Api {
 
   private static createEndpoint() {
     return axios.create({
-      baseURL: "http://84.201.188.117",
+      baseURL: "http://84.201.188.117:5021/",
       headers: {
         "Content-Type": "application/json-patch+json",
       },
