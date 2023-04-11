@@ -1,4 +1,4 @@
-import type { AxiosInstance, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosResponse } from "axios";
 
 interface AnyObj {
   [key: string]: unknown;
@@ -6,7 +6,7 @@ interface AnyObj {
 
 export abstract class BasicRest {
   protected updateAuthHeader(params: { token: string }) {
-    this.endpoint.defaults.headers.common['Authorization'] = params.token;
+    this.endpoint.defaults.headers.common["Authorization"] = params.token;
   }
 
   protected patchRequest<T = AnyObj>(url: string, params?: object) {
@@ -17,13 +17,16 @@ export abstract class BasicRest {
     return BasicRest.dataExtract<T>(this.endpoint.put<T>(url, params));
   }
 
-  protected postRequest<T = AnyObj>(url: string, params?: object) {
-    return BasicRest.dataExtract<T>(this.endpoint.post<T>(url, params));
+  protected postRequest<T = AnyObj>(
+    url: string,
+    params?: object,
+    head?: object
+  ) {
+    return BasicRest.dataExtract<T>(this.endpoint.post<T>(url, params, head));
   }
 
   protected getRequest<T = AnyObj>(url: string, params?: object) {
-    console.log(url, params);
-    return BasicRest.dataExtract<T>(this.endpoint.get<T>(url, { params }));
+    return BasicRest.dataExtract<T>(this.endpoint.get<T>(url, params));
   }
 
   protected deleteRequest<T = AnyObj>(url: string, params?: object) {

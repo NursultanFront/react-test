@@ -1,6 +1,7 @@
 #root {
   max-width: 375px;
   margin: 58px auto 0;
+  background-color: #fff;
 }
 
 .App {

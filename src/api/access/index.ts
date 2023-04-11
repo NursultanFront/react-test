@@ -4,18 +4,18 @@ import { type AccessToken } from "./types";
 import { AccessTokenResult } from "../types";
 
 export class AccessTokenRest extends BasicRest {
-  private urlName = "api/v3/clients/accessToken";
-  private accessKey = "891cf53c-01fc-4d74-a14c-592668b7a03c";
-  private ClientID = "2c44d8c2-c89a-472e-aab3-9a8a29142315";
-  private DeviceID = "7db72635-fd0a-46b9-813b-1627e3aa02ea";
+  private urlName = "api/v3/clients/accesstoken";
+  private accessKey = import.meta.env.VITE_ACCESS_KEY;
+  private ClientID = import.meta.env.VITE_CLIENT_ID;
+  private DeviceID = import.meta.env.VITE_DEVICE_ID;
 
   public constructor(endpoint: AxiosInstance) {
     super(endpoint);
   }
 
-  getToken = (params: { longitude: number; latitude: number }) => {
+  getToken = () => {
     return this.postRequest<AccessTokenResult>(
-      `${this.urlName}/${this.accessKey}`,
+      `${this.urlName}`,
       {
         accessToken: "",
         idClient: this.ClientID,
@@ -24,7 +24,12 @@ export class AccessTokenRest extends BasicRest {
         paramName: "device",
         paramValue: this.DeviceID,
         sourceQuery: 0,
-      } as AccessToken
+      },
+      {
+        headers: {
+          AccessKey: this.accessKey,
+        },
+      }
     );
   };
 }

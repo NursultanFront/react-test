@@ -8,7 +8,7 @@
 .bonus__wrapper {
   position: absolute;
   top: -53px;
-  max-width: 335px;
+  width: 335px;
   display: flex;
   padding: 20px 18px 19px;
   background: #ffffff;

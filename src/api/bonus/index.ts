@@ -8,8 +8,13 @@ export class BonusRest extends BasicRest {
   }
 
   private urlName = "api/v3/ibonus/generalInfo";
+  private accessKey = import.meta.env.VITE_ACCESS_KEY;
 
   getBonus = (token: string) => {
-    return this.getRequest<BonusResult>(`${this.urlName}/${token}`);
+    return this.getRequest<BonusResult>(`${this.urlName}/${token}`, {
+      headers: {
+        AccessKey: this.accessKey,
+      },
+    });
   };
 }

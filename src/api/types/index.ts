@@ -23,6 +23,6 @@ export type BonusResult = {
     typeBonusName: string;
     currentQuantity: number;
     forBurningQuantity: number;
-    dateBurning: Date;
+    dateBurning: string;
   };
 };
