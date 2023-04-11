@@ -7,10 +7,13 @@ const useStore = create<UserStore>((set) => ({
   token: "",
   loading: false,
   error: false,
-  getToken: async () => {
+  getToken: async (lat: number, lon: number) => {
     set({ loading: true, error: false });
     try {
-      const response = await api.accessToken.getToken();
+      const response = await api.accessToken.getToken({
+        latitude: lat,
+        longitude: lon,
+      });
       const accessToken = response.accessToken;
       set({ token: accessToken, isAuth: true });
     } catch (e) {

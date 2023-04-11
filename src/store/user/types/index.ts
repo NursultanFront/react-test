@@ -5,5 +5,5 @@ export interface UserStore {
   token: AccessTokenResult["accessToken"];
   loading: boolean;
   error: boolean;
-  getToken(): Promise<void>;
+  getToken(lat: number, lon: number): Promise<void>;
 }

@@ -13,15 +13,18 @@ export class AccessTokenRest extends BasicRest {
     super(endpoint);
   }
 
-  getToken = (params: { longitude: string; latitude: string }) => {
-    return this.postRequest<AccessTokenResult>(`${this.urlName}`, {
-      accessToken: this.accessKey,
-      idClient: this.ClientID,
-      latitude: 0,
-      longitude: 0,
-      paramName: "device",
-      paramValue: this.DeviceID,
-      sourceQuery: 0,
-    } as AccessToken);
+  getToken = (params: { longitude: number; latitude: number }) => {
+    return this.postRequest<AccessTokenResult>(
+      `${this.urlName}/${this.accessKey}`,
+      {
+        accessToken: "",
+        idClient: this.ClientID,
+        latitude: 0,
+        longitude: 0,
+        paramName: "device",
+        paramValue: this.DeviceID,
+        sourceQuery: 0,
+      } as AccessToken
+    );
   };
 }
