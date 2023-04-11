@@ -1,20 +1,36 @@
 import axios from "axios";
 import { AccessTokenRest } from "./access";
+import { BonusRest } from "./bonus";
 
 class Api {
-  private readonly endpoint;
+  private readonly endpointClient;
+  private readonly endpointBonus;
   public accessToken;
+  public bonusToken;
 
   public constructor() {
-    this.endpoint = Api.createEndpoint();
-    this.accessToken = new AccessTokenRest(this.endpoint);
+    this.endpointClient = Api.createEndpointClient();
+    this.endpointBonus = Api.createEndpointBonus();
+    this.accessToken = new AccessTokenRest(this.endpointClient);
+    this.bonusToken = new BonusRest(this.endpointBonus);
   }
 
-  private static createEndpoint() {
+  private static createEndpointClient() {
     return axios.create({
-      baseURL: "http://84.201.188.117:5021/",
+      baseURL: import.meta.env.VITE_ACCESS_TOKEN_API,
       headers: {
-        "Content-Type": "application/json-patch+json",
+        "Content-Type": "application/json",
+      },
+      transformRequest: [(data) => JSON.stringify(data)],
+      transformResponse: [(data) => JSON.parse(data ? data : "{}")],
+    });
+  }
+
+  private static createEndpointBonus() {
+    return axios.create({
+      baseURL: import.meta.env.VITE_BONUS_TOKEN_API,
+      headers: {
+        "Content-Type": "application/json",
       },
       transformRequest: [(data) => JSON.stringify(data)],
       transformResponse: [(data) => JSON.parse(data ? data : "{}")],

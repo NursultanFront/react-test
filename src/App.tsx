@@ -1,28 +1,28 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import { api } from "./api";
+import useStore from "./store/user";
+import bonusStore from "./store/bonus";
+import Bonus from "./components/Bonus";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const { getToken, isAuth, loading } = useStore();
+  const { getBonus, bonusName, burn, current, dateBurn } = bonusStore();
 
   useEffect(() => {
-    async function getValue() {
-      try {
-        const accessToken = await api.accessToken.getToken();
-        console.log(accessToken);
-      } catch (error) {
-        console.log(error);
+    console.log("app");
+    async function authToken() {
+      await getToken();
+      if (isAuth) {
+        getBonus();
       }
     }
 
-    getValue();
+    authToken();
   }, []);
 
   return (
     <div className="App">
-      <div>
+      {/* <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -41,7 +41,14 @@ function App() {
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p>
+      </p> */}
+      <Bonus
+        loading={loading}
+        bonusName={bonusName}
+        burn={burn}
+        current={current}
+        dateBurn={dateBurn}
+      ></Bonus>
     </div>
   );
 }
