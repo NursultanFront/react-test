@@ -13,7 +13,7 @@ export class AccessTokenRest extends BasicRest {
     super(endpoint);
   }
 
-  getToken = () => {
+  getToken = (params: { longitude: string; latitude: string }) => {
     return this.postRequest<AccessTokenResult>(`${this.urlName}`, {
       accessToken: this.accessKey,
       idClient: this.ClientID,

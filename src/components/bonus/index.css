@@ -1,0 +1,54 @@
+.bonus {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: red;
+  height: 148px;
+}
+.bonus__wrapper {
+  position: absolute;
+  top: -53px;
+  max-width: 335px;
+  display: flex;
+  padding: 20px 18px 19px;
+  background: #ffffff;
+  box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+.bonus__info {
+}
+
+.bonus__arrow {
+  display: flex;
+  align-items: center;
+}
+
+.card {
+  margin: 0 40px 0 0;
+}
+
+.card__top {
+  margin: 0 0 12px;
+}
+
+.card__bottom {
+}
+
+.card__title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: #000000;
+}
+
+.card__text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #979797;
+}
+
+.card__fire-img {
+  margin: 0 8px;
+}

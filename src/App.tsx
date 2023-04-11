@@ -2,14 +2,28 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import useStore from "./store/user";
 import bonusStore from "./store/bonus";
-import Bonus from "./components/Bonus";
+import Bonus from "./components/bonus/Bonus";
+import Header from "./components/header/Header";
 
 function App() {
+  const [latitude, setLatitude] = useState<number | null>(null);
+  const [longitude, setLongitude] = useState<number | null>(null);
   const { getToken, isAuth, loading } = useStore();
   const { getBonus, bonusName, burn, current, dateBurn } = bonusStore();
 
   useEffect(() => {
-    console.log("app");
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLatitude(position.coords.latitude);
+          setLongitude(position.coords.longitude);
+        },
+        (error) => {
+          console.log(error.message);
+        }
+      );
+    }
+
     async function authToken() {
       await getToken();
       if (isAuth) {
@@ -22,26 +36,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p> */}
+      <Header></Header>
       <Bonus
         loading={loading}
         bonusName={bonusName}
